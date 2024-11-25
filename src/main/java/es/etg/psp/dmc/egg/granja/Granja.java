@@ -1,6 +1,8 @@
 package es.etg.psp.dmc.egg.granja;
 
-public class Granja{
+import es.etg.psp.dmc.egg.visibilidad.Impresora;
+
+public class Granja implements Impresora{
 
     private static final String RECOLECTAR = "recolectar";
     private static final String TRANSPORTAR = "transportar";
@@ -14,7 +16,7 @@ public class Granja{
         if ((huevos + DOCENA) > CAPACIDAD_GRANJA)
             Granja.class.wait();
         huevos += DOCENA;
-        System.out.println(RECOLECTAR + Granja.huevos);
+        Impresora.imprimir(RECOLECTAR + Granja.huevos);
         Granja.class.notify();
     }
 
@@ -22,7 +24,7 @@ public class Granja{
         if (huevos < CAPACIDAD_CAMION)
             Granja.class.wait();
         huevos -= CAPACIDAD_CAMION;
-        System.out.println(TRANSPORTAR + Granja.huevos);
+        Impresora.imprimir(TRANSPORTAR + Granja.huevos);
         Granja.class.notify();
     }
 
